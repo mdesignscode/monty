@@ -1,4 +1,5 @@
-push 10
+push 20
+add
 pop
 push 2
 push 1

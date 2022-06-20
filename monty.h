@@ -88,6 +88,7 @@ typedef struct args_s
         stack_t **stack;
         char *line;
         int index;
+        int count;
 } args_t;
 
 /* ------ data structures ------ */

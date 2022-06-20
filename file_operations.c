@@ -10,6 +10,7 @@ void read_lines(void)
 	int is_in;
 	char buffer[120], **opcodes;
 
+	args.count = 0;
 	opcodes = create_opcodes();
 	args.index = 1;
 	while (fgets(buffer, sizeof(buffer), args.file))
@@ -29,6 +30,10 @@ void read_lines(void)
 		args.line = strtok(NULL, " \n");
 		if ((!strcmp("push", args.token)) && !args.line)
 			p_error(PUSH, args.index, 0);
+		if ((!strcmp("push", args.token)))
+			args.count++;
+		if ((!strcmp("pop", args.token)))
+			args.count--;
 		run_line();
 		++args.index;
 	}
