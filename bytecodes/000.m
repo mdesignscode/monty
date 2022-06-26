@@ -1,14 +1,28 @@
-push 20
-add
+queue
+ push 10
+ push 20
+ push 30
+ stack
+   
+  push 40
+ push 50
+ 
+ push 60
+ 
+
+ pall
+ pchar
+rotl
+pall
+pchar
+rotr
+pall
+pchar
 pop
-push 2
-push 1
-push 2
-  push 3
-      
-      
-                   
-push 10
-    push 5    
-      push    6        
+pop
+pop
+pop
+pop
+pop
+
 pall

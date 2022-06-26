@@ -12,17 +12,39 @@ void push(stack_t **stack, unsigned int line_number __attribute__((unused)))
 	stack_t *new_node;
 	int n;
 
+	(void)stack;
+
 	new_node = malloc(sizeof(stack_t));
 	if (!new_node)
 		p_error(MEMORY, 0, 0);
 	if (!isNumber(args.line) || !args.line)
 		p_error(PUSH, args.index, 0);
 
+	if (args.stack_or_queue == 'q')
+	{
+		enqueue();
+		return;
+	}
+
 	n = atoi(args.line);
+
 	new_node->n = n;
-	new_node->next = *stack;
 	new_node->prev = NULL;
-	*stack = new_node;
+	new_node->next = NULL;
+
+	if (!args.count)
+		args.front = args.back = new_node;
+
+	else
+	{
+		args.front->next = new_node;
+		args.front = new_node;
+		args.front->prev = *args.stack;
+		args.front->next = NULL;
+	}
+
+	*args.stack = args.front;
+	args.count++;
 }
 
 /**
@@ -36,12 +58,14 @@ void pall(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
 	stack_t *top;
 
+	(void)stack;
 	top = *stack;
 
 	while (top)
 	{
 		printf("%d\n", top->n);
-		top = top->next;
+
+		top = top->prev;
 	}
 }
 
@@ -68,18 +92,27 @@ void pint(stack_t **stack, unsigned int line_number __attribute__((unused)))
  */
 void pop(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
-	stack_t *popped;
+	stack_t *popped __attribute__((unused));
 
 	if (!*stack)
 		p_error(POP, args.index, 0);
 
-	popped = *stack;
+	if (args.stack_or_queue == 'q')
+	{
+		dequeue();
+		return;
+	}
+	*args.stack = args.front->prev;
 
-	*stack = (*stack)->next;
+	popped = args.front;
+
+	args.front = popped->prev;
 
 	free(popped);
-}
+	popped = NULL;
 
+	args.count--;
+}
 
 /**
  * swap - swaps the top two elements of the stack.
@@ -97,10 +130,11 @@ void swap(stack_t **stack, unsigned int line_number __attribute__((unused)))
 
 	top = *stack;
 
-	*stack = (*stack)->next;
+	*stack = (*stack)->prev;
 
-	top->next = (*stack)->next;
+	top->prev = (*stack)->prev;
 
-	(*stack)->next = top;
+	(*stack)->prev = top;
 
+	args.count--;
 }

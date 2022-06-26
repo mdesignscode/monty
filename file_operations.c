@@ -13,14 +13,16 @@ void read_lines(void)
 	args.count = 0;
 	opcodes = create_opcodes();
 	args.index = 1;
+	args.stack_or_queue = 's';
+
 	while (fgets(buffer, sizeof(buffer), args.file))
 	{
-		if (is_string_white(buffer))
-			args.index++;
-
 		args.token = strtok(buffer, " \n");
-		if (!args.token)
+		if (!args.token || *args.token == '#' || is_string_white(buffer))
+		{
+			args.index++;
 			continue;
+		}
 		is_in = is_in_array(args.token, opcodes);
 		if (!is_in)
 		{
@@ -28,15 +30,17 @@ void read_lines(void)
 			p_error(INSTRUCTION, args.index, args.token);
 		}
 		args.line = strtok(NULL, " \n");
+
 		if ((!strcmp("push", args.token)) && !args.line)
 			p_error(PUSH, args.index, 0);
-		if ((!strcmp("push", args.token)))
-			args.count++;
-		if ((!strcmp("pop", args.token)))
-			args.count--;
+
 		run_line();
+
 		++args.index;
 	}
+
+	free(opcodes);
+	opcodes = NULL;
 }
 
 /**
@@ -56,9 +60,19 @@ void run_line(void)
 	     {{"swap", swap}},
 	     {{"add", add}},
 	     {{"nop", nop}},
+	     {{"sub", sub}},
+	     {{"div", _div}},
+	     {{"mul", mul}},
+	     {{"mod", mod}},
+	     {{"pchar", pchar}},
+	     {{"pstr", pstr}},
+	     {{"rotl", rotl}},
+	     {{"rotr", rotr}},
+	     {{"stack", stack}},
+	     {{"queue", queue}},
 	     {{NULL, NULL}}};
 
-	for (i = 0; i < 7; i++)
+	for (i = 0; i < 17; i++)
 	{
 		is_in = strcmp(args.token, functions[i]->opcode);
 		if (!is_in)

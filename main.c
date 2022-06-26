@@ -22,8 +22,12 @@ int main(int argc, char **argv)
 	if (!args.stack)
 		return (-1);
 
+	args.front = (stack_t *)args.stack;
+
 	read_lines();
 
+	free(args.stack);
+	args.stack = NULL;
 
 	return (0);
 }

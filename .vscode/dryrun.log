@@ -1,0 +1,5 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/marlon/learning_programming/C/monty'
+clear ; gcc -g -Wall -Werror -Wextra -pedantic -std=c89 *.c -o monty
+make: Leaving directory '/home/marlon/learning_programming/C/monty'
+ 

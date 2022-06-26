@@ -10,7 +10,7 @@ char **create_opcodes(void)
 {
 	char **string_of_opcodes;
 
-	string_of_opcodes = malloc(sizeof(char *) * 8);
+	string_of_opcodes = malloc(sizeof(char *) * 18);
 	if (!string_of_opcodes)
 		return (NULL);
 
@@ -21,7 +21,17 @@ char **create_opcodes(void)
 	string_of_opcodes[4] = "swap";
 	string_of_opcodes[5] = "add";
 	string_of_opcodes[6] = "nop";
-	string_of_opcodes[7] = NULL;
+	string_of_opcodes[7] = "sub";
+	string_of_opcodes[8] = "div";
+	string_of_opcodes[9] = "mul";
+	string_of_opcodes[10] = "mod";
+	string_of_opcodes[11] = "pchar";
+	string_of_opcodes[12] = "pstr";
+	string_of_opcodes[13] = "rotl";
+	string_of_opcodes[14] = "rotr";
+	string_of_opcodes[15] = "stack";
+	string_of_opcodes[16] = "queue";
+	string_of_opcodes[17] = NULL;
 
 	return (string_of_opcodes);
 }

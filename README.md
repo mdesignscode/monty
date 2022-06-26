@@ -43,16 +43,38 @@ __OPCODES__ :
 
 push - pushes an element onto the stack. Usage: push integer
 
-pall - prints all alements on the stack. Usage: pall
+pall - prints all alements on the stack.
 
-pint - prints the top element on the stack. Usage: pint
+pint - prints the top element on the stack.
 
-add - adds the first and second elements and sets the result as the new top of the stack. Usage: add
+add - adds the first and second elements and sets the result as the new top of the stack.
 
-swap - swaps the first and second elements on the stack. Usage: swap
+swap - swaps the first and second elements on the stack.
 
-pop - removes the top element from the stack Usage: pop
+pop - removes the top element from the stack.
 
-nop - does nothing Usage: nop
+nop - does nothing.
+
+sub - subtracts the top element of the stack from the second top element of the stack.
+
+div - divides the second top element of the stack by the top element of the stack.
+
+mul - multiplies the second top element of the stack with the top element of the stack.
+
+mod - computes the rest of the division of the second top element of the stack by the top element of the stack.
+
+pchar - prints the char at the top of the stack, followed by a new line.
+
+pstr - prints the string starting at the top of the stack, followed by a new line.
+
+rotl - rotates the stack to the top.
+
+rotr rotates the stack to the bottom.
+
+stack - sets the format of the data to a stack (LIFO). This is the default behavior of the program.
+
+queue - sets the format of the data to a queue (FIFO).
+
+Comments are denoted by #
 
 __USAGE__: monty file
